@@ -1,11 +1,27 @@
-import React, {FC, memo} from 'react';
+import React, {FC, memo, useCallback} from 'react';
+import {FlatList, ListRenderItem} from 'react-native';
+
+import Message from '../../components/Message';
+import MessageT from '../../data/models/Message';
 
 import useMessages from './useMessages';
 
 const Messages: FC = () => {
-  useMessages();
+  const {keyExtractor, messages} = useMessages();
 
-  return <></>;
+  const renderItem = useCallback<ListRenderItem<MessageT>>(
+    ({item}) => <Message {...item} />,
+    [],
+  );
+
+  return (
+    <FlatList
+      data={messages}
+      extraData={messages}
+      renderItem={renderItem}
+      keyExtractor={keyExtractor}
+    />
+  );
 };
 
 export default memo(Messages);

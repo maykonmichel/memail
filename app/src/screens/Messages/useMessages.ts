@@ -1,8 +1,15 @@
 import {useQuery} from '@apollo/client';
 
 import MESSAGES, {MessagesData} from '../../data/gql/queries/MESSAGES';
+import {useCallback} from 'react';
 
 export default () => {
-  const meta = useQuery<MessagesData>(MESSAGES);
-  console.log(meta);
+  const {data: {messages = []} = {}} = useQuery<MessagesData>(MESSAGES);
+
+  const keyExtractor = useCallback(({id}) => id, []);
+
+  return {
+    keyExtractor,
+    messages,
+  };
 };
