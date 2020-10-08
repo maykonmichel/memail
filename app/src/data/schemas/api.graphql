@@ -1,0 +1,14 @@
+schema {
+  query: Query
+}
+
+type Message {
+  id: ID!
+  timestamp: Int!
+  subject: String!
+  detail: String!
+}
+
+type Query {
+  messages: [Message!]!
+}

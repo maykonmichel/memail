@@ -1,0 +1,16 @@
+{
+  "name": "MEmail",
+  "schemaPath": "src/store/schemas/api.graphql",
+  "includes": ["*"],
+  "extensions": {
+    "endpoints": {
+      "Default GraphQL Endpoint": {
+        "url": "http://localhost:3000",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
