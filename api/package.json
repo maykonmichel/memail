@@ -1,0 +1,7 @@
+{
+  "name": "MEmail",
+  "version": "1.0.0",
+  "description": "MEmail API",
+  "main": "index.js",
+  "license": "MIT"
+}
