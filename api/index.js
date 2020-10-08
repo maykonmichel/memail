@@ -18,7 +18,7 @@ const generateFakeMessages = (samples) => [...Array(samples)].map(generateFakeMe
 const messages = generateFakeMessages(100);
 
 app.get('/messages', (req, res) => {
-  res.status(200).send(messages.sort((a, b) => a.timestamp - b.timestamp));
+  res.status(200).send(messages.sort((a, b) => b.timestamp - a.timestamp));
 });
 
 server.listen(port, () => {
