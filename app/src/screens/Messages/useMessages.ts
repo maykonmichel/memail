@@ -7,7 +7,7 @@ import MESSAGES, {
 import {useCallback} from 'react';
 
 export default () => {
-  const {data: {messages = []} = {}} = useQuery<
+  const {data: {messages = []} = {}, loading} = useQuery<
     MessagesData,
     MessagesVariables
   >(MESSAGES);
@@ -16,6 +16,8 @@ export default () => {
 
   return {
     keyExtractor,
+    loading,
     messages,
+    refetchNew: () => {},
   };
 };

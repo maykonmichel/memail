@@ -1,5 +1,5 @@
-import React, {FC, memo, useCallback} from 'react';
-import {FlatList, ListRenderItem} from 'react-native';
+import React, {FC, memo, useCallback, useMemo} from 'react';
+import {FlatList, ListRenderItem, RefreshControl} from 'react-native';
 
 import Message from '../../components/Message';
 import MessageT from '../../data/models/Message';
@@ -8,7 +8,12 @@ import useMessages from './useMessages';
 import styles from './styles';
 
 const Messages: FC = () => {
-  const {keyExtractor, messages} = useMessages();
+  const {keyExtractor, loading, messages, refetchNew} = useMessages();
+
+  const refreshControl = useMemo(
+    () => <RefreshControl refreshing={loading} onRefresh={refetchNew} />,
+    [loading, refetchNew],
+  );
 
   const renderItem = useCallback<ListRenderItem<MessageT>>(
     ({item}) => <Message {...item} />,
@@ -22,6 +27,7 @@ const Messages: FC = () => {
       renderItem={renderItem}
       keyExtractor={keyExtractor}
       style={styles.container}
+      refreshControl={refreshControl}
     />
   );
 };
