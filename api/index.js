@@ -6,21 +6,39 @@ const app = express();
 const server = http.createServer(app);
 const port = 3000;
 
-const generateFakeMessage = () => ({
+const getTimestamp = ({after}) => {
+  const date = Date.now();
+
+  const oneSecondInMs = 1000;
+  const oneYearInMs = 365 * 24 * 3600 * 1000;
+  const range = {
+    min: oneSecondInMs,
+    max: after ? date - after : oneYearInMs
+  };
+
+  return date - faker.random.number(range);
+};
+
+const generateFakeMessage = (query) => ({
   id: faker.random.number(),
-  timestamp: faker.date.past().getTime(),
+  timestamp: getTimestamp(query),
   subject: faker.lorem.sentence(),
   detail: faker.lorem.paragraphs()
 })
 
-const generateFakeMessages = (samples) => [...Array(samples)].map(generateFakeMessage).sort((a, b) => b.timestamp - a.timestamp)
+const generateFakeMessages = (samples, query) => [...Array(samples)].map(() => generateFakeMessage(query))
 
-const generateSortedFakeMessages = (samples) => generateFakeMessages(samples).sort((a, b) => b.timestamp - a.timestamp)
+const generateSortedFakeMessages = (samples, query) => generateFakeMessages(samples, query).sort((a, b) => b.timestamp - a.timestamp)
 
-const messages = generateSortedFakeMessages(100);
+const getSamples = ({after}) => {
+  const from0To10 = faker.random.number({min: 0, max: 10});
+  return after ? from0To10 : 100;
+}
 
-app.get('/messages', (req, res) => {
-  res.status(200).send(messages);
+app.get('/messages', ({ query }, res) => {
+  const samples = getSamples(query);
+
+  res.status(200).send(generateSortedFakeMessages(samples, query));
 });
 
 server.listen(port, () => {
