@@ -19,8 +19,12 @@ export default new ApolloClient({
       Query: {
         fields: {
           messages: {
+            keyArgs: false,
             merge: (existing, incoming, {args}) => {
               if (args) {
+                if (args.before) {
+                  return [...existing, ...incoming];
+                }
                 if (args.after) {
                   return [...incoming, ...existing];
                 }

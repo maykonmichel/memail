@@ -8,7 +8,13 @@ import useMessages from './useMessages';
 import styles from './styles';
 
 const Messages: FC = () => {
-  const {keyExtractor, loading, messages, fetchMoreRecent} = useMessages();
+  const {
+    fetchMoreOlder,
+    fetchMoreRecent,
+    keyExtractor,
+    loading,
+    messages,
+  } = useMessages();
 
   const refreshControl = useMemo(
     () => <RefreshControl refreshing={loading} onRefresh={fetchMoreRecent} />,
@@ -28,6 +34,8 @@ const Messages: FC = () => {
       keyExtractor={keyExtractor}
       style={styles.container}
       refreshControl={refreshControl}
+      onEndReached={fetchMoreOlder}
+      onEndReachedThreshold={0.1}
     />
   );
 };
