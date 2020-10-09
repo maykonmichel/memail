@@ -6,8 +6,8 @@ const app = express();
 const server = http.createServer(app);
 const port = 3000;
 
-const getTimestamp = ({after}) => {
-  const date = Date.now();
+const getTimestamp = ({before, after}) => {
+  const date = before || Date.now();
 
   const oneSecondInMs = 1000;
   const oneYearInMs = 365 * 24 * 3600 * 1000;
