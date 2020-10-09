@@ -13,12 +13,14 @@ const generateFakeMessage = () => ({
   detail: faker.lorem.paragraphs()
 })
 
-const generateFakeMessages = (samples) => [...Array(samples)].map(generateFakeMessage)
+const generateFakeMessages = (samples) => [...Array(samples)].map(generateFakeMessage).sort((a, b) => b.timestamp - a.timestamp)
 
-const messages = generateFakeMessages(100);
+const generateSortedFakeMessages = (samples) => generateFakeMessages(samples).sort((a, b) => b.timestamp - a.timestamp)
+
+const messages = generateSortedFakeMessages(100);
 
 app.get('/messages', (req, res) => {
-  res.status(200).send(messages.sort((a, b) => b.timestamp - a.timestamp));
+  res.status(200).send(messages);
 });
 
 server.listen(port, () => {
