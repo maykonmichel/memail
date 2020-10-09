@@ -7,12 +7,13 @@ export type MessagesData = {
 };
 
 export type MessagesVariables = {
+  before?: number;
   after?: number;
 };
 
 export default gql`
-  query($after: Int) {
-    messages(after: $after)
+  query($before: Int, $after: Int) {
+    messages(before: $before, after: $after)
       @rest(type: "Message", path: "/messages?{args}", method: "GET") {
       id
       timestamp
