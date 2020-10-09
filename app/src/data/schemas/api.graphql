@@ -10,5 +10,5 @@ type Message {
 }
 
 type Query {
-  messages: [Message!]!
+  messages(after: Int): [Message!]!
 }
