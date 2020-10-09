@@ -13,5 +13,7 @@ const restLink = new RestLink({uri});
 
 export default new ApolloClient({
   link: ApolloLink.from([restLink, httpLink]),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {Message: {fields: {read: (existing = false) => existing}}},
+  }),
 });

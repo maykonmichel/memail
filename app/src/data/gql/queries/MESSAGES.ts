@@ -13,6 +13,7 @@ export default gql`
       timestamp
       subject
       detail
+      read
     }
   }
 `;

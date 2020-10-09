@@ -3,6 +3,7 @@ type Message = {
   timestamp: number;
   subject: string;
   detail: string;
+  read: boolean;
 };
 
 export default Message;

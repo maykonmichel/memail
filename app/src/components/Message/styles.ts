@@ -14,16 +14,19 @@ export default StyleSheet.create({
     flex: 2,
     ...typography.subhead,
     textAlign: 'right',
-    color: colors.white.main,
+    color: colors.white.light,
   },
   icon: {
     flex: 1,
+    color: colors.white.light,
+  },
+  read: {
     color: colors.white.main,
   },
   subject: {
     flex: 5,
     ...typography.headline,
-    color: colors.white.main,
+    color: colors.white.light,
     paddingRight: 8,
   },
 });
