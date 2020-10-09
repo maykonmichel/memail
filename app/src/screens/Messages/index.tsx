@@ -8,11 +8,11 @@ import useMessages from './useMessages';
 import styles from './styles';
 
 const Messages: FC = () => {
-  const {keyExtractor, loading, messages, refetchNew} = useMessages();
+  const {keyExtractor, loading, messages, fetchMoreRecent} = useMessages();
 
   const refreshControl = useMemo(
-    () => <RefreshControl refreshing={loading} onRefresh={refetchNew} />,
-    [loading, refetchNew],
+    () => <RefreshControl refreshing={loading} onRefresh={fetchMoreRecent} />,
+    [fetchMoreRecent, loading],
   );
 
   const renderItem = useCallback<ListRenderItem<MessageT>>(
