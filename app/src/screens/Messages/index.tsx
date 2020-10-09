@@ -6,6 +6,7 @@ import MessageT from '../../data/models/Message';
 
 import useMessages from './useMessages';
 import styles from './styles';
+import colors from '../../theme/colors';
 
 const Messages: FC = () => {
   const {
@@ -17,7 +18,13 @@ const Messages: FC = () => {
   } = useMessages();
 
   const refreshControl = useMemo(
-    () => <RefreshControl refreshing={loading} onRefresh={fetchMoreRecent} />,
+    () => (
+      <RefreshControl
+        refreshing={loading}
+        onRefresh={fetchMoreRecent}
+        tintColor={colors.white.light}
+      />
+    ),
     [fetchMoreRecent, loading],
   );
 
