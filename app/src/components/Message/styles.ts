@@ -11,13 +11,17 @@ export default StyleSheet.create({
     paddingVertical: 16,
   },
   date: {
-    flex: 1,
+    flex: 2,
     ...typography.subhead,
     textAlign: 'right',
     color: colors.white.main,
   },
+  icon: {
+    flex: 1,
+    color: colors.white.main,
+  },
   subject: {
-    flex: 3,
+    flex: 5,
     ...typography.headline,
     color: colors.white.main,
     paddingRight: 8,
